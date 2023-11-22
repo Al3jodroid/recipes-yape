@@ -8,6 +8,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.al3jodroid.recipes.model.data.RecipeResult
 
 @Composable
 fun HomeScreen() {
@@ -16,7 +17,7 @@ fun HomeScreen() {
     //render the composable components
     Column {
         RenderHomeState(stateValueCollect)
-        RenderButton(stateValueCollect,homeViewModel::callExecution)
+        RenderButton(stateValueCollect) { homeViewModel.searchRecipes("chicken") }
     }
 }
 
@@ -43,8 +44,11 @@ fun RenderHomeState(homeUiState: HomeUiState) {
 }
 
 @Composable
-fun RenderEmpty() {
-    TODO("Not yet implemented")
+fun RenderEmpty(modifier: Modifier = Modifier) {
+    Text(
+        text = "Empty Stuff.",
+        modifier = modifier
+    )
 }
 
 @Composable
@@ -56,12 +60,15 @@ fun RenderInitial(modifier: Modifier = Modifier) {
 }
 
 @Composable
-fun RenderLoading() {
-    TODO("Not yet implemented")
+fun RenderLoading(modifier: Modifier = Modifier) {
+    Text(
+        text = "Loading...",
+        modifier = modifier
+    )
 }
 
 @Composable
-fun RenderSuccess(info: String, modifier: Modifier = Modifier) {
+fun RenderSuccess(info: List<RecipeResult>, modifier: Modifier = Modifier) {
     Text(
         text = "Hello!: $info.",
         modifier = modifier
@@ -69,8 +76,11 @@ fun RenderSuccess(info: String, modifier: Modifier = Modifier) {
 }
 
 @Composable
-fun RenderUnavailable() {
-    TODO("Not yet implemented")
+fun RenderUnavailable(modifier: Modifier = Modifier) {
+    Text(
+        text = "Unavailable.",
+        modifier = modifier
+    )
 }
 
 

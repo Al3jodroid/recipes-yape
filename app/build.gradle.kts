@@ -22,13 +22,25 @@ android {
         }
     }
 
+    var apiScheme = "\"https:"
+    var apiURL = "www.themealdb.com/api/json/v1/1/\""
+    var apiKeyValue = "\"1\""
+
     buildTypes {
+        debug {
+            buildConfigField(type = "String", name = "API_SCHEME", value = apiScheme+"\"")
+            buildConfigField(type = "String", name = "API_URL", value = apiScheme + apiURL)
+            buildConfigField(type = "String", name = "API_KEY_VALUE", value = apiKeyValue)
+        }
         release {
             isMinifyEnabled = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
+            buildConfigField(type = "String", name = "API_SCHEME", value = apiScheme)
+            buildConfigField(type = "String", name = "API_URL", value = apiScheme + apiURL)
+            buildConfigField(type = "String", name = "API_KEY_VALUE", value = apiKeyValue)
         }
     }
     compileOptions {
@@ -40,6 +52,7 @@ android {
     }
     buildFeatures {
         compose = true
+        buildConfig = true
     }
     composeOptions {
         kotlinCompilerExtensionVersion = "1.5.3"
@@ -77,7 +90,12 @@ dependencies {
     implementation("androidx.hilt:hilt-navigation-compose:1.1.0-alpha01")
 
     //add livedata libraries for states
-    implementation ("androidx.compose.runtime:runtime-livedata:1.1.0")
+    implementation("androidx.compose.runtime:runtime-livedata:1.1.0")
+
+    //http external connections libraries
+    implementation("com.squareup.retrofit2:retrofit:2.9.0")
+    implementation("com.squareup.retrofit2:converter-gson:2.9.0")
+    implementation("com.squareup.okhttp3:logging-interceptor:4.7.2")
 }
 
 kapt {
