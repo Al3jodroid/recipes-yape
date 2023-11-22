@@ -30,4 +30,18 @@ class RecipeRetrofitApi(retrofit: Retrofit) : RecipeApi {
             return Result.failure(Exception())
         }
     }
+
+    override suspend fun getRecipeById(id: String): Result<RecipeListResultDto?> {
+        try {
+            return withContext(Dispatchers.IO) {
+                val response = mService.searchRecipeById(id)
+                response.runCatching {
+                    return@withContext if (this.isSuccessful) Result.success(this.body())
+                    else Result.failure(Exception())
+                }
+            }
+        } catch (e: Exception) {
+            return Result.failure(Exception())
+        }
+    }
 }

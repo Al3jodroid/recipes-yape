@@ -102,5 +102,5 @@ class ClientModule @Inject constructor() {
      */
     @Provides
     @Singleton
-    fun provideWeatherRepository(weatherApi: RecipeApi) = RecipeRepository(weatherApi)
+    fun provideRecipeRepository(recipeApi: RecipeApi) = RecipeRepository(recipeApi)
 }

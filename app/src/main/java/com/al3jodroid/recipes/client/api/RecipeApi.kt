@@ -13,5 +13,6 @@ interface RecipeApi {
      * @return a list of [RecipeResultDto] that matches with the query
      */
     suspend fun searchRecipes(query: String): Result<RecipeListResultDto?>
+    suspend fun getRecipeById(id: String): Result<RecipeListResultDto?>
 
 }

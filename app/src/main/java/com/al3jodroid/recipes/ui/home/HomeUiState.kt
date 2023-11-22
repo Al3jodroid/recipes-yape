@@ -9,4 +9,6 @@ sealed class HomeUiState {
     data object Empty : HomeUiState()
     data object Unavailable : HomeUiState()
     data class Success(val info: List<RecipeResult>) : HomeUiState()
+
+    data object NavigateToRecipe : HomeUiState()
 }

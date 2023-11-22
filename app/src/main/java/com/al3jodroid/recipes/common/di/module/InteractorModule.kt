@@ -25,4 +25,5 @@ class InteractorModule @Inject constructor()  {
     @Singleton
     fun provideRecipesUseCase(recipeRepository: RecipeRepository): RecipesUseCase =
         RecipesInteractor(recipeRepository)
+
 }

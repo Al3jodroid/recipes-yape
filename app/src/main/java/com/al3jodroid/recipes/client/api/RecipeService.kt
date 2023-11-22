@@ -11,7 +11,8 @@ import retrofit2.http.Query
  */
 interface RecipeService {
     companion object {
-        const val SEARCH = "search.php"
+        const val SEARCH_BY_NAME = "search.php"
+        const val SEARCH_BY_ID = "lookup.php"
         const val API_KEY_VAR = "key"
     }
 
@@ -20,7 +21,11 @@ interface RecipeService {
      * @param query that contains the string to use to search recipes
      * @return A [Response] with a list of [RecipeResultDto] that match with the query
      */
-    @GET(SEARCH)
+    @GET(SEARCH_BY_NAME)
     suspend fun searchRecipes(@Query("s") query: String): Response<RecipeListResultDto>
+
+
+    @GET(SEARCH_BY_ID)
+    suspend fun searchRecipeById(@Query("i") query: String): Response<RecipeListResultDto>
 
 }

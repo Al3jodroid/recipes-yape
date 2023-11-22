@@ -20,14 +20,12 @@ import javax.inject.Inject
 @HiltViewModel
 class HomeViewModel @Inject constructor(
     private val recipesUseCase: RecipesUseCase
-) :
-    ViewModel() {
+) : ViewModel() {
     //just a helper string for the log messages
     private val mTAG = HomeViewModel::class.java.simpleName
 
     //the StateFlow object observed, to notify UI changes in the screen
-    private val _uiState: MutableStateFlow<HomeUiState> =
-        MutableStateFlow(HomeUiState.Initial)
+    private val _uiState: MutableStateFlow<HomeUiState> = MutableStateFlow(HomeUiState.Initial)
     val uiState: StateFlow<HomeUiState> = _uiState
 
     //the result info that going to be returned to UI
@@ -45,7 +43,6 @@ class HomeViewModel @Inject constructor(
         }
     }
 
-
     /**
      * When the server response and the information pass through all the app layers,
      * here its validated and emit the state depending of the result.
@@ -58,5 +55,8 @@ class HomeViewModel @Inject constructor(
         }
     }
 
-
+    fun onClickRecipeFromList(recipe:RecipeResult){
+        recipesUseCase.cacheRecipe(recipe)
+        _uiState.value = HomeUiState.NavigateToRecipe
+    }
 }

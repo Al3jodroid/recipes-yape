@@ -20,4 +20,9 @@ class RecipeRepository(private val recipeApi: RecipeApi) {
             it.toRecipeResult()
         }?.toList()
     }
+
+
+    suspend fun getRecipeById(id: String): RecipeResult? {
+        return recipeApi.getRecipeById(id).getOrNull()?.meals?.get(0)?.toRecipeResult()
+    }
 }
