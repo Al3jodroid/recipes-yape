@@ -1,7 +1,6 @@
 package com.al3jodroid.recipes.client.api
 
 import com.al3jodroid.recipes.model.dto.RecipeListResultDto
-import com.al3jodroid.recipes.model.dto.RecipeResultDto
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import retrofit2.Retrofit

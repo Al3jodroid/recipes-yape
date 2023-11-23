@@ -5,7 +5,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.al3jodroid.recipes.interactor.RecipesUseCase
 import com.al3jodroid.recipes.model.data.RecipeResult
-import com.al3jodroid.recipes.util.ConnectivityObserver
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -57,6 +56,5 @@ class HomeViewModel @Inject constructor(
 
     fun onClickRecipeFromList(recipe:RecipeResult){
         recipesUseCase.cacheRecipe(recipe)
-        _uiState.value = HomeUiState.NavigateToRecipe
     }
 }

@@ -1,4 +1,4 @@
-package com.al3jodroid.recipes
+package com.al3jodroid.recipes.ui.navigation
 
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Home
@@ -29,8 +29,8 @@ object Recipe : RecipeDestination {
     override val route = "detail"
 
     const val recipeIdArg = "recipe_id"
-    val routeWithArgs = "${route}/{${recipeIdArg}}"
-    val arguments = listOf(navArgument(recipeIdArg) {
+    val routeWithArgs = "$route/{$recipeIdArg}"
+    val args= listOf(navArgument(recipeIdArg) {
         type = NavType.StringType
     })
     val deepLinks = listOf(
