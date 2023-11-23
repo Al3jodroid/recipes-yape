@@ -3,7 +3,9 @@ plugins {
     id("org.jetbrains.kotlin.android")
     kotlin("kapt")
     id("com.google.dagger.hilt.android")
+    id ("com.google.android.libraries.mapsplatform.secrets-gradle-plugin")
 }
+
 
 android {
     namespace = "com.al3jodroid.recipes"
@@ -28,7 +30,7 @@ android {
 
     buildTypes {
         debug {
-            buildConfigField(type = "String", name = "API_SCHEME", value = apiScheme+"\"")
+            buildConfigField(type = "String", name = "API_SCHEME", value = apiScheme + "\"")
             buildConfigField(type = "String", name = "API_URL", value = apiScheme + apiURL)
             buildConfigField(type = "String", name = "API_KEY_VALUE", value = apiKeyValue)
         }
@@ -64,7 +66,6 @@ android {
     }
 }
 dependencies {
-
     implementation("androidx.core:core-ktx:1.12.0")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.6.2")
     implementation("androidx.activity:activity-compose:1.8.1")
@@ -96,6 +97,10 @@ dependencies {
     implementation("com.squareup.retrofit2:retrofit:2.9.0")
     implementation("com.squareup.retrofit2:converter-gson:2.9.0")
     implementation("com.squareup.okhttp3:logging-interceptor:4.7.2")
+
+    // Android Maps Compose composables for the Maps SDK for Android
+    implementation("com.google.maps.android:maps-compose:4.1.1")
+
 }
 
 kapt {

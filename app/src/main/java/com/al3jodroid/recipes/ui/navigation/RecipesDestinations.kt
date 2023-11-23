@@ -1,6 +1,7 @@
 package com.al3jodroid.recipes.ui.navigation
 
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.List
 import androidx.compose.material.icons.filled.LocationOn
@@ -38,7 +39,20 @@ object Recipe : RecipeDestination {
     )
 }
 
-object LocationMapRecipe : RecipeDestination {
+object LocationRecipe : RecipeDestination {
     override val icon = Icons.Filled.LocationOn
     override val route = "location"
+
+    const val locationRecipeIdArg = "recipe_id"
+    val routeWithArgs = "${Recipe.route}/{$locationRecipeIdArg}"
+    val args= listOf(navArgument(locationRecipeIdArg) {
+        type = NavType.StringType
+    })
+    val deepLinks = listOf(
+        navDeepLink { uriPattern = "recipes://${Recipe.route}/{$locationRecipeIdArg}"}
+    )
 }
+
+
+// Screens to be displayed in the top RallyTabRow
+val recipeRowScreens = listOf(Recipe, LocationRecipe)

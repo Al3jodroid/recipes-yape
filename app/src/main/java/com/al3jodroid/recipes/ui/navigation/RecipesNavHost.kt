@@ -3,10 +3,13 @@ package com.al3jodroid.recipes.ui.navigation
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavGraph.Companion.findStartDestination
+import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import androidx.navigation.navigation
 import com.al3jodroid.recipes.ui.home.HomeScreen
+import com.al3jodroid.recipes.ui.recipe.MapCard
 import com.al3jodroid.recipes.ui.recipe.RecipeScreen
 
 @Composable
@@ -15,9 +18,10 @@ fun BuildRecipesNavHost(navController: NavHostController, modifier: Modifier = M
         navController = navController, startDestination = Home.route, modifier = modifier
     ) {
         composable(route = Home.route) { HomeScreen() }
-
         composable(
-            route = Recipe.routeWithArgs, arguments = Recipe.args, deepLinks = Recipe.deepLinks
+            route = Recipe.routeWithArgs,
+            arguments = Recipe.args,
+            deepLinks = Recipe.deepLinks
         ) { navBackStackEntry ->
             val recipeId = navBackStackEntry.arguments?.getString(Recipe.recipeIdArg)
             RecipeScreen(recipeId ?: "")

@@ -8,9 +8,14 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
+import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -23,9 +28,20 @@ fun HomeScreen() {
     val homeViewModel = hiltViewModel<HomeViewModel>()
     //render the composable components
     Column {
+        RenderFormSearch(homeViewModel)
         RenderHomeState(homeViewModel)
-        RenderButton(onSearchClick = { homeViewModel.searchRecipes("chicken") })
     }
+}
+
+@Composable
+fun RenderFormSearch(homeViewModel: HomeViewModel) {
+    var text by remember { mutableStateOf("") }
+    OutlinedTextField(
+        value = text,
+        onValueChange = { text = it },
+        label = { Text("Label") }
+    )
+    RenderButton(onSearchClick = { homeViewModel.searchRecipes(text) })
 }
 
 @Composable
@@ -45,9 +61,7 @@ fun RenderHomeState(homeViewModel: HomeViewModel) {
         is HomeUiState.Initial -> RenderInitial()
         is HomeUiState.Loading -> RenderLoading()
         is HomeUiState.Success -> RenderSuccess(stateValueCollect.info)
-
         is HomeUiState.Unavailable -> RenderUnavailable()
-
     }
 }
 
