@@ -26,19 +26,12 @@ fun RecipeScreen(recipeId: String) {
 @Composable
 fun RenderRecipeState(recipeUiState: RecipeUiState) {
     when (recipeUiState) {
-        RecipeUiState.Initial -> RenderInitialDetails()
-        RecipeUiState.Loading -> RenderLoadingDetails()
+        is RecipeUiState.Loading -> RenderLoadingDetails()
         is RecipeUiState.Success -> RenderSuccessDetails(recipeUiState.info)
-        RecipeUiState.Unavailable -> RenderUnavailableDetails()
+        is RecipeUiState.Unavailable -> RenderUnavailableDetails()
     }
 }
 
-@Composable
-fun RenderInitialDetails() {
-    Text(
-        text = "Initial State.",
-    )
-}
 
 @Composable
 fun RenderLoadingDetails() {

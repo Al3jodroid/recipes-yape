@@ -1,5 +1,6 @@
 package com.al3jodroid.recipes.common.di.module
 
+import com.al3jodroid.recipes.client.geocoder.GeocoderService
 import com.al3jodroid.recipes.interactor.RecipesInteractor
 import com.al3jodroid.recipes.interactor.RecipesUseCase
 import com.al3jodroid.recipes.repository.RecipeRepository
@@ -15,15 +16,19 @@ import javax.inject.Singleton
  */
 @InstallIn(SingletonComponent::class)
 @Module
-class InteractorModule @Inject constructor()  {
+class InteractorModule @Inject constructor() {
     /**
      * Retrieves an instance of [RecipesUseCase]
      * @param recipeRepository the repository that helps to retrieve the information of recipes
+     * @param geocoderService the service that helps to return a Lat,Long value from a location name
      * @return a concrete implementation [RecipesInteractor] as the use-case
      */
     @Provides
     @Singleton
-    fun provideRecipesUseCase(recipeRepository: RecipeRepository): RecipesUseCase =
-        RecipesInteractor(recipeRepository)
+    fun provideRecipesUseCase(
+        recipeRepository: RecipeRepository,
+        geocoderService: GeocoderService
+    ): RecipesUseCase =
+        RecipesInteractor(recipeRepository, geocoderService)
 
 }

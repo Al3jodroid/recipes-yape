@@ -5,9 +5,11 @@ import com.al3jodroid.recipes.BuildConfig
 import com.al3jodroid.recipes.client.api.RecipeApi
 import com.al3jodroid.recipes.client.api.RecipeRetrofitApi
 import com.al3jodroid.recipes.client.api.RecipeService.Companion.API_KEY_VAR
+import com.al3jodroid.recipes.client.geocoder.GeocoderGoogle
+import com.al3jodroid.recipes.client.geocoder.GeocoderService
 import com.al3jodroid.recipes.repository.RecipeRepository
-import com.al3jodroid.recipes.util.ConnectivityObserver
-import com.al3jodroid.recipes.util.NetworkConnectivityObserver
+import com.al3jodroid.recipes.util.connectivity.ConnectivityObserver
+import com.al3jodroid.recipes.util.connectivity.NetworkConnectivityObserver
 import com.google.gson.GsonBuilder
 import dagger.Module
 import dagger.Provides
@@ -80,7 +82,7 @@ class ClientModule @Inject constructor() {
      */
     @Provides
     @Singleton
-    fun provideHttpClient(interceptor: Interceptor) =
+    fun provideHttpClient(interceptor: Interceptor): OkHttpClient =
         OkHttpClient.Builder().addInterceptor(interceptor).build()
 
     /**
@@ -99,5 +101,12 @@ class ClientModule @Inject constructor() {
      */
     @Provides
     @Singleton
-    fun provideRecipeRepository(recipeApi: RecipeApi) = RecipeRepository(recipeApi)
+    fun provideRecipeRepository(recipeApi: RecipeApi): RecipeRepository =
+        RecipeRepository(recipeApi)
+
+
+    @Provides
+    @Singleton
+    fun provideGeocoderService(@ApplicationContext appContext: Context): GeocoderService =
+        GeocoderGoogle(appContext)
 }

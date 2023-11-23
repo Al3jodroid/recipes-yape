@@ -3,11 +3,19 @@ package com.al3jodroid.recipes.ui.home
 import android.util.Log
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.text.KeyboardActions
+import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Search
+import androidx.compose.material.icons.outlined.Search
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -16,9 +24,14 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalFocusManager
+import androidx.compose.ui.platform.LocalSoftwareKeyboardController
+import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import coil.compose.AsyncImage
 import com.al3jodroid.recipes.LocalNavController
 import com.al3jodroid.recipes.model.data.RecipeResult
 import com.al3jodroid.recipes.ui.navigation.navigateToRecipe
@@ -33,21 +46,44 @@ fun HomeScreen() {
     }
 }
 
+@OptIn(ExperimentalComposeUiApi::class)
 @Composable
 fun RenderFormSearch(homeViewModel: HomeViewModel) {
     var text by remember { mutableStateOf("") }
-    OutlinedTextField(
-        value = text,
-        onValueChange = { text = it },
-        label = { Text("Label") }
+    val keyboardController = LocalSoftwareKeyboardController.current
+
+    val keyboardActions = KeyboardActions(
+        onSearch = {
+            if(text.isNotEmpty()){
+                homeViewModel.searchRecipes(text)
+                keyboardController?.hide()
+            }
+        }
     )
-    RenderButton(onSearchClick = { homeViewModel.searchRecipes(text) })
+
+    Row {
+        OutlinedTextField(
+            keyboardActions = keyboardActions,
+            keyboardOptions = KeyboardOptions(imeAction = ImeAction.Search),
+            value = text,
+            onValueChange = { text = it },
+            singleLine = true,
+            label = { Text("Lets search some recipes!") }
+        )
+        RenderButton(onSearchClick = {
+            if(text.isNotEmpty()){
+                homeViewModel.searchRecipes(text)
+                keyboardController?.hide()
+            }
+        })
+    }
 }
 
 @Composable
 fun RenderButton(onSearchClick: () -> Unit) {
-    Button(onClick = onSearchClick) {
-        Text("Search chicken")
+
+    IconButton(onClick = onSearchClick) {
+        Icon(imageVector = Icons.Filled.Search, contentDescription = "Button Search")
     }
 }
 
@@ -95,7 +131,7 @@ fun RenderSuccess(info: List<RecipeResult>, modifier: Modifier = Modifier) {
         modifier = modifier.padding(vertical = 4.dp)
     ) {
         items(info) {
-            Recipe(recipe = it, onRecipeClick = {
+            RecipeItem(recipe = it, onRecipeClick = {
                 homeViewModel.onClickRecipeFromList(it)
                 navController.navigateToRecipe(it.id)
             })
@@ -111,13 +147,17 @@ fun RenderUnavailable(modifier: Modifier = Modifier) {
 }
 
 @Composable
-private fun Recipe(recipe: RecipeResult, onRecipeClick: () -> Unit) {
+private fun RecipeItem(recipe: RecipeResult, onRecipeClick: () -> Unit) {
     Card(
         modifier = Modifier
             .padding(vertical = 4.dp, horizontal = 8.dp)
             .clickable(onClick = onRecipeClick)
     ) {
         Text(recipe.name)
+        AsyncImage(
+            model = recipe.thumbnailUrl,
+            contentDescription = null,
+        )
     }
 }
 

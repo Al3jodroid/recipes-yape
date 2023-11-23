@@ -35,6 +35,7 @@ class HomeViewModel @Inject constructor(
      */
     fun searchRecipes(query: String) {
         Log.d(mTAG, "searching recipe: $query")
+        _uiState.value = HomeUiState.Loading
         viewModelScope.launch(Dispatchers.IO) {
             resultList = recipesUseCase.searchRecipes(query)
             Log.d(mTAG, "size list result server: ${resultList?.size ?: "null"}")

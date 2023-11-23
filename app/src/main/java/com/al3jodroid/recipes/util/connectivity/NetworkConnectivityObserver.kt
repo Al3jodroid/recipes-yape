@@ -1,4 +1,4 @@
-package com.al3jodroid.recipes.util
+package com.al3jodroid.recipes.util.connectivity
 
 import android.content.Context
 import android.net.ConnectivityManager

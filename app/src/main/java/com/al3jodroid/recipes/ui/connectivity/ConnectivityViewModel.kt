@@ -3,7 +3,7 @@ package com.al3jodroid.recipes.ui.connectivity
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.al3jodroid.recipes.util.ConnectivityObserver
+import com.al3jodroid.recipes.util.connectivity.ConnectivityObserver
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow

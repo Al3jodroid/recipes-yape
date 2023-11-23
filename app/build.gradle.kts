@@ -98,8 +98,11 @@ dependencies {
     implementation("com.squareup.retrofit2:converter-gson:2.9.0")
     implementation("com.squareup.okhttp3:logging-interceptor:4.7.2")
 
-    // Android Maps Compose composables for the Maps SDK for Android
+    // Android maps Compose for Android sdk
     implementation("com.google.maps.android:maps-compose:4.1.1")
+
+    //library for loading images
+    implementation("io.coil-kt:coil-compose:2.5.0")
 
 }
 

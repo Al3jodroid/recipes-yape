@@ -21,7 +21,7 @@ class RecipeViewModel @Inject constructor(
     private val mTAG = RecipeViewModel::class.java.simpleName
 
     //the StateFlow object observed, to notify UI changes in the screen
-    private val _uiState: MutableStateFlow<RecipeUiState> = MutableStateFlow(RecipeUiState.Initial)
+    private val _uiState: MutableStateFlow<RecipeUiState> = MutableStateFlow(RecipeUiState.Loading)
     val uiState: StateFlow<RecipeUiState> = _uiState
 
     //the result info that going to be returned to UI
@@ -32,7 +32,7 @@ class RecipeViewModel @Inject constructor(
         Log.d(mTAG, "searching recipe Id: $id")
         viewModelScope.launch(Dispatchers.IO) {
             result = recipesUseCase.getRecipeById(id)
-            Log.d(mTAG, "recipe found: ${result?: "null"}")
+            Log.d(mTAG, "recipe found: ${result ?: "null"}")
             onResultGetRecipe(result)
         }
     }
