@@ -3,13 +3,10 @@ package com.al3jodroid.recipes.ui.navigation
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavGraph.Companion.findStartDestination
-import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import androidx.navigation.navigation
 import com.al3jodroid.recipes.ui.home.HomeScreen
-import com.al3jodroid.recipes.ui.recipe.MapCard
 import com.al3jodroid.recipes.ui.recipe.RecipeScreen
 
 @Composable

@@ -104,6 +104,10 @@ dependencies {
     //library for loading images
     implementation("io.coil-kt:coil-compose:2.5.0")
 
+    //add reflection capabilities fore read the data class from JSON
+    // (for a very specific "situation" from the origin JSON incoming)
+    implementation ("org.jetbrains.kotlin:kotlin-reflect:1.9.10")
+
 }
 
 kapt {

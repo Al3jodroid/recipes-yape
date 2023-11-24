@@ -1,5 +1,6 @@
 package com.al3jodroid.recipes
 
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -7,14 +8,13 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
-import androidx.compose.runtime.getValue
 import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
-import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import com.al3jodroid.recipes.model.data.RecipeResult
 import com.al3jodroid.recipes.ui.connectivity.ConnectivityIndicator
 import com.al3jodroid.recipes.ui.navigation.BuildRecipesNavHost
 import com.al3jodroid.recipes.ui.theme.RecipesTheme
@@ -22,6 +22,9 @@ import com.al3jodroid.recipes.ui.theme.RecipesTheme
 // set a reference of the NavHostController allowing to access to it in any place of the UI tree
 val LocalNavController = staticCompositionLocalOf<NavHostController> { error("Not found!") }
 
+/**
+ * Separates the initial definition of composable UI declarations, and start all from here
+ */
 @Composable
 fun RecipesApp() {
     RecipesTheme {
@@ -29,7 +32,6 @@ fun RecipesApp() {
         //this its added for access to the navigation controller anywhere
         //without pass it via arguments through the classes
         CompositionLocalProvider(LocalNavController provides navController) {
-
             // A surface container using the 'background' color from the theme
             Surface(
                 modifier = Modifier.fillMaxSize(),
@@ -38,6 +40,7 @@ fun RecipesApp() {
                 Column {
                     //thanks to the argument type definition the viewModel type can be inferred too
                     ConnectivityIndicator(hiltViewModel())
+                    //the start of the navigation (only 2 screens for this case)
                     BuildRecipesNavHost(
                         navController = navController,
                         modifier = Modifier.padding(4.dp)

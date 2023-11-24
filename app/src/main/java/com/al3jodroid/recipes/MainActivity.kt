@@ -18,6 +18,7 @@ class MainActivity : ComponentActivity() {
         //can be done inside the RecipesApp, call here for reference/pedagogic purposes
         connectivityViewModel.startListenConnectivity()
         setContent {
+            //the only compose call that start all the declarative UI
             RecipesApp()
         }
     }

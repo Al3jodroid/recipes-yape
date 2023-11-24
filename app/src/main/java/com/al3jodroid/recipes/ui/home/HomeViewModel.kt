@@ -55,6 +55,10 @@ class HomeViewModel @Inject constructor(
         }
     }
 
+    /**
+     * When a user click on a recipe, call this method for adding it to the local cache,
+     * and use it in the next screen od details of the recipe
+     */
     fun onClickRecipeFromList(recipe:RecipeResult){
         recipesUseCase.cacheRecipe(recipe)
     }

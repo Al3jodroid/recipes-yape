@@ -13,6 +13,10 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 
+/**
+ * The [RecipeViewModel] that defines the states and data of a single recipe to show in UI
+ * @param [recipesUseCase] that contains all the business definitions for access to recipe info
+ */
 @HiltViewModel
 class RecipeViewModel @Inject constructor(
     private val recipesUseCase: RecipesUseCase
@@ -28,6 +32,9 @@ class RecipeViewModel @Inject constructor(
     private var result: RecipeResult? = null
 
 
+    /**
+     * based on [id] retrieve an specific recipe from the business model
+     */
     fun getRecipeById(id: String) {
         Log.d(mTAG, "searching recipe Id: $id")
         viewModelScope.launch(Dispatchers.IO) {
@@ -37,6 +44,9 @@ class RecipeViewModel @Inject constructor(
         }
     }
 
+    /**
+     * Depending of the result, an state its emitted to be managed in UI, with info (if its the case)
+     */
     private fun onResultGetRecipe(result: RecipeResult?) {
         when (result) {
             null -> _uiState.value = RecipeUiState.Unavailable

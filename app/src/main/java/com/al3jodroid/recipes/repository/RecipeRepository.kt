@@ -21,7 +21,11 @@ class RecipeRepository(private val recipeApi: RecipeApi) {
         }?.toList()
     }
 
-
+    /**
+     * the retrieve of a recipe based on the id
+     * @param id that its related with the recipe to search
+     * @return a [RecipeResult] that contains the information of the recipe found
+     */
     suspend fun getRecipeById(id: String): RecipeResult? {
         return recipeApi.getRecipeById(id).getOrNull()?.meals?.get(0)?.toRecipeResult()
     }

@@ -1,3 +1,16 @@
 <resources>
-    <string name="app_name">Recipes!</string>
+    <string name="app_name">YapeRecipe</string>
+    <string name="yape_recipe_title">Yape\nRecipe</string>
+    <string name="search_app_parenthesis">(search app)</string>
+    <string name="search_recipes_hint">Lets search some recipes!</string>
+    <string name="no_result_ingredients_search">There is no results for your ingredient search.</string>
+    <string name="start_typing">Start typing in the search-box a main ingredient or part of a meal name.</string>
+    <string name="no_results">There is no available results for the search.</string>
+    <string name="image_thumbnail_description">Image thumbnail %1$s</string>
+    <string name="details_recipe_cant_load">The details of this recipe cant be loaded, try again in a few moments.</string>
+    <string name="origin">Origin: %1$s</string>
+    <string name="the_origin_location_cant_be_found">The origin location cant be found.</string>
+    <string name="no_internet">There its a problem with the internet connection\nplease review your data settings.</string>
+    <string name="unknown_network_state">Unknown network state\nPlease check your data settings.</string>
+    <string name="home_icon">Home Icon</string>
 </resources>

@@ -1,5 +1,6 @@
 package com.al3jodroid.recipes.model.data
 
 class RecipeDetail(
-    val moresutff: String? = ""
+    var instructions: String = "",
+    val ingredientsAndMeasure: List<Pair<String, String>> = ArrayList()
 )

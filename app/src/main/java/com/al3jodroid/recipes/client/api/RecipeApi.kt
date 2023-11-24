@@ -13,6 +13,13 @@ interface RecipeApi {
      * @return a list of [RecipeResultDto] that matches with the query
      */
     suspend fun searchRecipes(query: String): Result<RecipeListResultDto?>
+
+    /**
+     * Retrieve the specific recipe based on an id
+     * @param id related to the recipe to search
+     * @return a list of [RecipeResultDto] that matches with the query
+     * (in this case with only 1 child)
+     */
     suspend fun getRecipeById(id: String): Result<RecipeListResultDto?>
 
 }

@@ -87,16 +87,17 @@ class ClientModule @Inject constructor() {
 
     /**
      * Retrieves the implementation of the calls defined to the API
+     * @param retrofitApi that contains the call definitions to API
      * @return a concrete implementation of [RecipeRetrofitApi]
      */
     @Provides
     @Singleton
     fun provideRecipeApi(retrofitApi: Retrofit): RecipeApi = RecipeRetrofitApi(retrofitApi)
 
-
     /**
      * Retrieves an implementation of the repository as a SSOT that returns the information local
      * or remote to show in the UI
+     * @param recipeApi that contains the call contract to API
      * @return a [RecipeRepository] implementation
      */
     @Provides
@@ -104,7 +105,11 @@ class ClientModule @Inject constructor() {
     fun provideRecipeRepository(recipeApi: RecipeApi): RecipeRepository =
         RecipeRepository(recipeApi)
 
-
+    /**
+     * Retrieves an implementation of the Geocoder service that return a lat-long location
+     * @param appContext of the application required lo launch the GeocodeGoogle implementation
+     * @return a [GeocoderService] implementation
+     */
     @Provides
     @Singleton
     fun provideGeocoderService(@ApplicationContext appContext: Context): GeocoderService =

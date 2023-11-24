@@ -25,6 +25,11 @@ interface RecipeService {
     suspend fun searchRecipes(@Query("s") query: String): Response<RecipeListResultDto>
 
 
+    /**
+     * define the call for search a recipe based on an id
+     * @param query that contains the sid to search in backend
+     * @return A [Response] with a list of [RecipeResultDto] that match with the query
+     */
     @GET(SEARCH_BY_ID)
     suspend fun searchRecipeById(@Query("i") query: String): Response<RecipeListResultDto>
 
