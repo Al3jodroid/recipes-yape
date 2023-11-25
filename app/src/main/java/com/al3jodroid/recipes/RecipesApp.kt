@@ -1,6 +1,5 @@
 package com.al3jodroid.recipes
 
-import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -14,7 +13,6 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
-import com.al3jodroid.recipes.model.data.RecipeResult
 import com.al3jodroid.recipes.ui.connectivity.ConnectivityIndicator
 import com.al3jodroid.recipes.ui.navigation.BuildRecipesNavHost
 import com.al3jodroid.recipes.ui.theme.RecipesTheme

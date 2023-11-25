@@ -26,7 +26,7 @@ fun RecipeResultDto.toRecipeResult(): RecipeResult {
 fun RecipeResultDto.toRecipeResultDetails(): RecipeDetail {
     return RecipeDetail(
         instructions = strInstructions ?: "",
-        ingredientsAndMeasure = this.toRecipeResultIngredientsAndMeasures(),
+        ingredientsAndMeasure = this.toRecipeResultIngredientsAndMeasuresWithReflection(),
     )
 }
 
@@ -35,7 +35,7 @@ fun RecipeResultDto.toRecipeResultDetails(): RecipeDetail {
  * came from the server in separated variables called ingredient1,ingredient2, ingredient3, so its needed
  * to manage reflexion of classes and string tokenization and validations to try to map in a more effective way
  */
-fun RecipeResultDto.toRecipeResultIngredientsAndMeasures(): List<Pair<String, String>> {
+fun RecipeResultDto.toRecipeResultIngredientsAndMeasuresWithReflection(): List<Pair<String, String>> {
     val ingredients: HashMap<String, String> = HashMap()
     val listToReturn: ArrayList<Pair<String, String>> = ArrayList()
 

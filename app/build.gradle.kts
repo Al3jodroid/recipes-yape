@@ -74,6 +74,7 @@ dependencies {
     implementation("androidx.compose.ui:ui-graphics")
     implementation("androidx.compose.ui:ui-tooling-preview")
     implementation("androidx.compose.material3:material3")
+    implementation("androidx.test:core-ktx:1.5.0")
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
@@ -81,6 +82,15 @@ dependencies {
     androidTestImplementation("androidx.compose.ui:ui-test-junit4")
     debugImplementation("androidx.compose.ui:ui-tooling")
     debugImplementation("androidx.compose.ui:ui-test-manifest")
+
+    //Additional libraries for testing
+    testImplementation ("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.7.3")
+    androidTestImplementation ("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.7.3")
+    testImplementation ("com.android.support.test:runner:1.0.2")
+    androidTestImplementation ("com.google.truth:truth:1.0.1")
+    androidTestImplementation ("android.arch.core:core-testing:1.1.1")
+    testImplementation ("com.squareup.okhttp3:mockwebserver:4.10.0")
+    androidTestImplementation ("com.squareup.okhttp3:mockwebserver:4.10.0")
 
     //dependency injection libraries
     implementation("com.google.dagger:hilt-android:2.48.1")
